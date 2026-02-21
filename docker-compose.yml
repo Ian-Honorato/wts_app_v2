@@ -64,7 +64,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./frontend/wtsapp
       dockerfile: Dockerfile # Verifique se o caminho do contexto está correto conforme sua imagem
     container_name: minha-api-frontend
     restart: unless-stopped
