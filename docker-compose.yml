@@ -1,17 +1,14 @@
 version: "3.9"
 
-# Define uma rede customizada para a aplicação, para melhor isolamento e comunicação.
 networks:
   app-network:
     driver: bridge
 
-# Define os volumes nomeados
 volumes:
-  db-data: # Para persistir os dados do banco
-  backend-uploads: # Para persistir os uploads do backend
+  db-data:
+  backend-uploads:
 
 services:
-  # Serviço do Banco de Dados (MariaDB)
   db:
     image: mariadb:10.11
     container_name: minha-api-db
@@ -43,7 +40,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Serviço do Backend (API Node.js)
   backend:
     build:
       context: ./backend
@@ -58,22 +54,23 @@ services:
       DATABASE_NAME: contabilidadeapp
       DATABASE_USER: docker
       DATABASE_PASSWORD: docker
+      PORT: 3000
+      NODE_ENV: production
     networks:
       - app-network
     volumes:
+      # Mapeia a pasta interna /app/uploads para o volume externo
       - backend-uploads:/app/uploads
 
-  # Serviço do Frontend (Aplicação Vite/React)
   frontend:
     build:
-      context: ./frontend/wtsapp
-      dockerfile: Dockerfile
+      context: ./frontend
+      dockerfile: Dockerfile # Verifique se o caminho do contexto está correto conforme sua imagem
     container_name: minha-api-frontend
     restart: unless-stopped
     networks:
       - app-network
 
-  # Serviço do Nginx (Proxy Reverso)
   nginx:
     build:
       context: ./nginx

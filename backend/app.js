@@ -57,9 +57,10 @@ class App {
   middlewares() {
     // --- Configuração do CORS com Whitelist ---
     const whitelist = [
-      "http://72.60.13.212",
-      " http://ian-honorato.com.br",
-      " https://ian-honorato.com.br ",
+      "http://valideja.com.br",
+      "https://valideja.com.br",
+      "http://www.valideja.com.br",
+      "https://www.valideja.com.br",
     ]; // Adicione outras origens permitidas aqui
     const corsOptions = {
       origin: (origin, callback) => {

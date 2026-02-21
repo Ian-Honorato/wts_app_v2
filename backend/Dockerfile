@@ -33,7 +33,8 @@ RUN chown -R node:node /app
 USER node
 
 # Expõe a porta que a aplicação usa.
-EXPOSE 3000
+EXPOSE 3001
+
 
 # O comando para iniciar a aplicação.
 CMD ["npm", "start"]
